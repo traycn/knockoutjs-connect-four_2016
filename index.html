@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+
+<!-- 
+	Knockout DOM binding sample with array
+	To check KnockOut documentation visit: http://knockoutjs.com/documentation/introduction.html
+ -->
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Connect Four - KnockoutJS</title>
+        <link rel="icon" href="styles/favicon/red-circle.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="styles/connectFour.css" rel="stylesheet" />
+        <script src="scripts/connectFour.js"></script>
+    </head>
+ <body>
+    <div class="content">
+        <h1>Connect Four</h1>
+        <p>Knockout the bot in this classic game of Connect Four.</p>
+        <p>Written in <a href="https://knockoutjs.com/" target="_blank">KnockoutJS</a>.</p>
+        <table class="table table-bordered">
+			<!--
+				Throw buttons. Notice the biding to userThrow method (when click)
+				and throwEnabled (full column)
+			-->
+            <thead>
+               <tr>
+                    <td><button data-bind="click: function(){userThrow(0);}, enable: throwEnabled(0)" type="button" />&#9660;</td>
+                    <td><button data-bind="click: function(){userThrow(1);}, enable: throwEnabled(1)" type="button" />&#9660;</td>
+                    <td><button data-bind="click: function(){userThrow(2);}, enable: throwEnabled(2)" type="button" />&#9660;</td>
+                    <td><button data-bind="click: function(){userThrow(3);}, enable: throwEnabled(3)" type="button" />&#9660;</td>
+                    <td><button data-bind="click: function(){userThrow(4);}, enable: throwEnabled(4)" type="button" />&#9660;</td>
+                    <td><button data-bind="click: function(){userThrow(5);}, enable: throwEnabled(5)" type="button" />&#9660;</td>
+                    <td><button data-bind="click: function(){userThrow(6);}, enable: throwEnabled(6)" type="button" />&#9660;</td>
+                    <td><button data-bind="click: function(){userThrow(7);}, enable: throwEnabled(7)" type="button" />&#9660;</td>
+                    <td><button data-bind="click: function(){userThrow(8);}, enable: throwEnabled(8)" type="button" />&#9660;</td>
+                </tr>
+            </thead>
+			 <!-- 
+			    foreach bind render an array from modelView 
+				For more information, check knockout documentation: http://knockoutjs.com/documentation/foreach-binding.html
+				Notice the nested foreach. One for rows and the other one for columns
+			 -->
+            <tbody data-bind="foreach: { data: board, as: 'row' }">
+                <tr data-bind="foreach: cols">
+                    <td><span data-bind="text: $data, attr:{'class': $data}" /></td>
+                </tr>
+            </tbody>
+        </table>
+		
+		<!-- 
+			Binding for play again button and winner text when game ends 
+		-->
+        <input type="button" data-bind="click: newGame, visible: playAgainVisible" value="Play again" />
+        <label class="endGame" data-bind="text:winner" />
+   </div>
+
+<!-- you must link knockout library and the viewmodel after declare DOM binding -->
+<script src="scripts/knockout-2.1.0.js"></script>
+<script src="scripts/connectFourVM.js"></script>   
+        
+ </body>
+</html>
